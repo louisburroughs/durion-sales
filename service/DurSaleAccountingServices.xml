@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+    <service verb="sync" noun="InvoiceToAccounting" type="script"
+             location="component://durion-sales/service/groovy/DurSaleAccountingServices.groovy#syncInvoiceToAccounting">
+        <in-parameters>
+            <parameter name="invoiceId" required="true"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="accountingInvoiceId"/>
+            <parameter name="syncStatus"/>
+        </out-parameters>
+    </service>
+
+    <service verb="update" noun="InvoiceAccountingStatus" type="inline">
+        <in-parameters>
+            <parameter name="invoiceId" required="true"/>
+            <parameter name="accountingStatus" required="true"/>
+        </in-parameters>
+        <actions>
+            <entity-find-one entity-name="durion.sales.DurSaleInvoice" value-field="invoice"/>
+            <set field="invoice.accountingStatus" from="accountingStatus"/>
+            <entity-update value-field="invoice"/>
+        </actions>
+    </service>
+
+</services>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-3.xsd"
+        default-menu-title="Payment Terminal" default-menu-index="5">
+
+    <transition name="processPayment">
+        <service-call name="durion.sales.DurSalePaymentServices.process#CreditCardPayment"/>
+        <default-response url="."/>
+    </transition>
+
+    <parameter name="invoiceId"/>
+
+    <actions>
+        <entity-find-one entity-name="durion.sales.DurSaleInvoice" value-field="invoice"/>
+    </actions>
+
+    <widgets>
+        <container>
+            <label text="Payment Terminal" type="h2"/>
+            
+            <container-box>
+                <box-header title="Invoice Details"/>
+                <box-body>
+                    <label text="Invoice Number: ${invoice?.invoiceNumber ?: 'N/A'}"/>
+                    <label text="Customer: ${invoice?.customerName ?: 'N/A'}"/>
+                    <label text="Total Amount: ${ec.l10n.formatCurrency(invoice?.totalAmount, invoice?.currencyUomId)}"/>
+                    <label text="Balance Due: ${ec.l10n.formatCurrency(invoice?.balanceDue, invoice?.currencyUomId)}"/>
+                </box-body>
+            </container-box>
+
+            <form-single name="PaymentForm" transition="processPayment">
+                <field name="invoiceId"><default-field><hidden/></default-field></field>
+                <field name="amount"><default-field>
+                    <text-line default-value="${invoice?.balanceDue}"/>
+                </default-field></field>
+                <field name="cardNumber"><default-field title="Card Number">
+                    <text-line/>
+                </default-field></field>
+                <field name="expirationDate"><default-field title="Expiration (MM/YY)">
+                    <text-line/>
+                </default-field></field>
+                <field name="cvv"><default-field title="CVV">
+                    <text-line/>
+                </default-field></field>
+                <field name="cardholderName"><default-field title="Cardholder Name">
+                    <text-line/>
+                </default-field></field>
+                <field name="submitButton"><default-field title="Process Payment">
+                    <submit/>
+                </default-field></field>
+            </form-single>
+        </container>
+    </widgets>
+
+</screen>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+    <service verb="create" noun="SaleOrder" type="inline">
+        <in-parameters>
+            <parameter name="customerId" required="true"/>
+            <parameter name="customerName"/>
+            <parameter name="orderDate" type="Timestamp" default="ec.user.nowTimestamp"/>
+            <parameter name="salesPersonId"/>
+            <parameter name="notes"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="orderId"/>
+        </out-parameters>
+        <actions>
+            <service-call name="create#durion.sales.DurSaleOrder" in-map="context" out-map="context"/>
+        </actions>
+    </service>
+
+    <service verb="update" noun="SaleOrder" type="inline">
+        <in-parameters>
+            <parameter name="orderId" required="true"/>
+            <parameter name="status"/>
+            <parameter name="notes"/>
+        </in-parameters>
+        <actions>
+            <service-call name="update#durion.sales.DurSaleOrder" in-map="context"/>
+        </actions>
+    </service>
+
+    <service verb="add" noun="OrderItem" type="inline">
+        <in-parameters>
+            <parameter name="orderId" required="true"/>
+            <parameter name="productId" required="true"/>
+            <parameter name="quantity" type="BigDecimal" required="true"/>
+            <parameter name="unitPrice" type="BigDecimal"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="orderItemId"/>
+        </out-parameters>
+        <actions>
+            <service-call name="create#durion.sales.DurSaleOrderItem" in-map="context" out-map="context"/>
+        </actions>
+    </service>
+
+</services>

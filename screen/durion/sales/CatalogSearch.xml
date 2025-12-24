@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-3.xsd"
+        default-menu-title="Product Catalog" default-menu-index="3">
+
+    <transition name="searchProducts">
+        <service-call name="durion.sales.DurSaleCatalogServices.search#Products"/>
+        <default-response url="."/>
+    </transition>
+
+    <transition name="getProductDetail">
+        <service-call name="durion.sales.DurSaleCatalogServices.get#ProductDetail"/>
+        <default-response url="."/>
+    </transition>
+
+    <actions>
+        <service-call name="durion.sales.DurSaleCatalogServices.search#Products" out-map="context"/>
+    </actions>
+
+    <widgets>
+        <container>
+            <label text="Product Catalog" type="h2"/>
+            
+            <form-single name="SearchForm" transition="searchProducts">
+                <field name="searchTerm"><default-field title="Search">
+                    <text-line/>
+                </default-field></field>
+                <field name="categoryId"><default-field title="Category">
+                    <text-line/>
+                </default-field></field>
+                <field name="submitButton"><default-field title="Search">
+                    <submit/>
+                </default-field></field>
+            </form-single>
+
+            <container-box>
+                <box-header title="Products"/>
+                <box-body>
+                    <form-list name="ProductsList" list="productList">
+                        <field name="productId"><default-field><display/></default-field></field>
+                        <field name="productName"><default-field><display/></default-field></field>
+                        <field name="sku"><default-field><display/></default-field></field>
+                        <field name="price"><default-field><display format="#,##0.00"/></default-field></field>
+                        <field name="quantityOnHand"><default-field title="QOH"><display/></default-field></field>
+                        <field name="detailLink"><default-field title="">
+                            <link url="getProductDetail" text="View" parameter-map="[productId: productId]"/>
+                        </default-field></field>
+                    </form-list>
+                </box-body>
+            </container-box>
+        </container>
+    </widgets>
+
+</screen>

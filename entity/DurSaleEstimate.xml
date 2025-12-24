@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">
+    
+    <entity entity-name="DurSaleEstimate" package="durion.sales">
+        <field name="estimateId" type="id" is-pk="true"/>
+        <field name="estimateNumber" type="text-short"/>
+        <field name="estimateDate" type="date-time"/>
+        <field name="customerId" type="id"/>
+        <field name="customerName" type="text-medium"/>
+        <field name="totalAmount" type="currency-amount"/>
+        <field name="status" type="text-short"/>
+        <field name="validUntilDate" type="date"/>
+        <field name="orderId" type="id"/>
+        <field name="notes" type="text-long"/>
+    </entity>
+
+</entities>

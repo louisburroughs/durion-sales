@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+    <service verb="search" noun="Products" type="inline">
+        <in-parameters>
+            <parameter name="searchTerm"/>
+            <parameter name="categoryId"/>
+            <parameter name="isActive" default="Y"/>
+            <parameter name="pageIndex" type="Integer" default="0"/>
+            <parameter name="pageSize" type="Integer" default="20"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="productList" type="List"/>
+            <parameter name="productListCount" type="Integer"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="durion.sales.DurSaleProduct" list="productList">
+                <search-form-inputs default-order-by="productName"/>
+                <econdition field-name="isActive" from="isActive"/>
+                <select-field field-name="productId,productName,sku,price,imageUrl"/>
+            </entity-find>
+        </actions>
+    </service>
+
+    <service verb="get" noun="ProductDetail" type="inline">
+        <in-parameters>
+            <parameter name="productId" required="true"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="product" type="Map"/>
+        </out-parameters>
+        <actions>
+            <entity-find-one entity-name="durion.sales.DurSaleProduct" value-field="product"/>
+        </actions>
+    </service>
+
+</services>

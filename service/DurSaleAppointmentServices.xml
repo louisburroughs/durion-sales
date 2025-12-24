@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+    <service verb="create" noun="Appointment" type="inline">
+        <in-parameters>
+            <parameter name="customerId" required="true"/>
+            <parameter name="customerName"/>
+            <parameter name="appointmentDate" type="Timestamp" required="true"/>
+            <parameter name="duration" type="Integer"/>
+            <parameter name="serviceType"/>
+            <parameter name="vehicleId"/>
+            <parameter name="notes"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="appointmentId"/>
+        </out-parameters>
+        <actions>
+            <service-call name="create#durion.sales.DurSaleAppointment" in-map="context" out-map="context"/>
+        </actions>
+    </service>
+
+    <service verb="update" noun="Appointment" type="inline">
+        <in-parameters>
+            <parameter name="appointmentId" required="true"/>
+            <parameter name="status"/>
+            <parameter name="assignedTechnicianId"/>
+            <parameter name="notes"/>
+        </in-parameters>
+        <actions>
+            <service-call name="update#durion.sales.DurSaleAppointment" in-map="context"/>
+        </actions>
+    </service>
+
+</services>

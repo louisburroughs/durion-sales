@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-3.xsd"
+        default-menu-title="Appointments" default-menu-index="2">
+
+    <transition name="createAppointment">
+        <service-call name="durion.sales.DurSaleAppointmentServices.create#Appointment"/>
+        <default-response url="."/>
+    </transition>
+
+    <transition name="updateAppointment">
+        <service-call name="durion.sales.DurSaleAppointmentServices.update#Appointment"/>
+        <default-response url="."/>
+    </transition>
+
+    <actions>
+        <set field="fromDate" from="ec.user.nowTimestamp"/>
+        <entity-find entity-name="durion.sales.DurSaleAppointment" list="appointmentList">
+            <search-form-inputs default-order-by="appointmentDate"/>
+            <date-filter from-field-name="appointmentDate" thru-field-name="appointmentDate"/>
+        </entity-find>
+    </actions>
+
+    <widgets>
+        <container>
+            <label text="Appointment Calendar" type="h2"/>
+            
+            <form-single name="CreateAppointmentForm" transition="createAppointment">
+                <field name="customerId"><default-field><text-line/></default-field></field>
+                <field name="customerName"><default-field><text-line/></default-field></field>
+                <field name="appointmentDate"><default-field><date-time/></default-field></field>
+                <field name="duration"><default-field><text-line default-value="60"/></default-field></field>
+                <field name="serviceType"><default-field><text-line/></default-field></field>
+                <field name="vehicleId"><default-field><text-line/></default-field></field>
+                <field name="notes"><default-field><text-area rows="3"/></default-field></field>
+                <field name="submitButton"><default-field title="Create Appointment">
+                    <submit/>
+                </default-field></field>
+            </form-single>
+
+            <container-box>
+                <box-header title="Upcoming Appointments"/>
+                <box-body>
+                    <form-list name="AppointmentsList" list="appointmentList">
+                        <field name="appointmentDate"><default-field><display format="yyyy-MM-dd HH:mm"/></default-field></field>
+                        <field name="customerName"><default-field><display/></default-field></field>
+                        <field name="serviceType"><default-field><display/></default-field></field>
+                        <field name="status"><default-field><display/></default-field></field>
+                        <field name="assignedTechnicianId"><default-field><display/></default-field></field>
+                    </form-list>
+                </box-body>
+            </container-box>
+        </container>
+    </widgets>
+
+</screen>

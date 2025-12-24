@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">
+    
+    <entity entity-name="DurSaleAppointment" package="durion.sales">
+        <field name="appointmentId" type="id" is-pk="true"/>
+        <field name="customerId" type="id"/>
+        <field name="customerName" type="text-medium"/>
+        <field name="appointmentDate" type="date-time"/>
+        <field name="duration" type="number-integer"/>
+        <field name="status" type="text-short"/>
+        <field name="serviceType" type="text-medium"/>
+        <field name="assignedTechnicianId" type="id"/>
+        <field name="vehicleId" type="id"/>
+        <field name="notes" type="text-long"/>
+    </entity>
+
+</entities>

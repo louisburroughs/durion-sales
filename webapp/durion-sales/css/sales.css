@@ -1,0 +1,103 @@
+/* Durion Sales Component Styles */
+
+.pos-terminal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.order-summary {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.product-card {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.3s;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.appointment-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+
+.appointment-slot {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.appointment-slot.available {
+    background-color: #e8f5e9;
+}
+
+.appointment-slot.booked {
+    background-color: #ffebee;
+}
+
+.invoice-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.invoice-status.paid {
+    background-color: #4caf50;
+    color: white;
+}
+
+.invoice-status.partial {
+    background-color: #ff9800;
+    color: white;
+}
+
+.invoice-status.unpaid {
+    background-color: #f44336;
+    color: white;
+}
+
+.payment-terminal {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.payment-terminal input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.payment-terminal button {
+    width: 100%;
+    padding: 15px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.payment-terminal button:hover {
+    background-color: #45a049;
+}

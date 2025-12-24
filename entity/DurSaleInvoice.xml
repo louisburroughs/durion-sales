@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">
+    
+    <entity entity-name="DurSaleInvoice" package="durion.sales">
+        <field name="invoiceId" type="id" is-pk="true"/>
+        <field name="invoiceNumber" type="text-short"/>
+        <field name="invoiceDate" type="date-time"/>
+        <field name="orderId" type="id"/>
+        <field name="customerId" type="id"/>
+        <field name="customerName" type="text-medium"/>
+        <field name="totalAmount" type="currency-amount"/>
+        <field name="paidAmount" type="currency-amount"/>
+        <field name="balanceDue" type="currency-amount"/>
+        <field name="status" type="text-short"/>
+        <field name="dueDate" type="date"/>
+        <field name="accountingStatus" type="text-short"/>
+        <relationship type="one" related="durion.sales.DurSaleOrder" short-alias="order"/>
+    </entity>
+
+</entities>

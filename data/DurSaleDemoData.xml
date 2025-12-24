@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-facade-xml type="seed-initial">
+    <!-- Demo data for durion-sales component -->
+    
+    <!-- Sample Orders -->
+    <durion.sales.DurSaleOrder orderId="ORD-001" orderDate="2025-12-20 10:00:00" 
+                                customerId="CUST-001" customerName="John Smith"
+                                status="completed" totalAmount="129.97" taxAmount="10.40"
+                                salesPersonId="SALES-001"/>
+    
+    <!-- Sample Order Items -->
+    <durion.sales.DurSaleOrderItem orderItemId="OI-001" orderId="ORD-001" 
+                                    productId="PROD-001" productName="Oil Filter"
+                                    quantity="2" unitPrice="12.99" lineAmount="25.98"/>
+    
+    <durion.sales.DurSaleOrderItem orderItemId="OI-002" orderId="ORD-001" 
+                                    productId="PROD-003" productName="Brake Pads"
+                                    quantity="1" unitPrice="79.99" lineAmount="79.99"/>
+    
+    <!-- Sample Appointments -->
+    <durion.sales.DurSaleAppointment appointmentId="APT-001" 
+                                      customerId="CUST-001" customerName="John Smith"
+                                      appointmentDate="2025-12-24 14:00:00" duration="120"
+                                      status="confirmed" serviceType="Oil Change and Brake Service"/>
+    
+    <!-- Sample Invoice -->
+    <durion.sales.DurSaleInvoice invoiceId="INV-001" invoiceNumber="INV-2025-001"
+                                  invoiceDate="2025-12-20 10:30:00" orderId="ORD-001"
+                                  customerId="CUST-001" customerName="John Smith"
+                                  totalAmount="129.97" paidAmount="129.97" balanceDue="0"
+                                  status="paid" accountingStatus="synced"/>
+    
+</entity-facade-xml>

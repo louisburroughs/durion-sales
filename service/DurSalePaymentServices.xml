@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+    <service verb="process" noun="CreditCardPayment" type="script"
+             location="component://durion-sales/service/groovy/DurSalePaymentServices.groovy#processCreditCardPayment">
+        <in-parameters>
+            <parameter name="invoiceId" required="true"/>
+            <parameter name="amount" type="BigDecimal" required="true"/>
+            <parameter name="cardNumber" required="true"/>
+            <parameter name="expirationDate" required="true"/>
+            <parameter name="cvv" required="true"/>
+            <parameter name="cardholderName"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="paymentId"/>
+            <parameter name="transactionId"/>
+            <parameter name="status"/>
+            <parameter name="message"/>
+        </out-parameters>
+    </service>
+
+    <service verb="record" noun="Payment" type="inline">
+        <in-parameters>
+            <parameter name="invoiceId" required="true"/>
+            <parameter name="orderId"/>
+            <parameter name="amount" type="BigDecimal" required="true"/>
+            <parameter name="paymentMethod" required="true"/>
+            <parameter name="transactionId"/>
+            <parameter name="status" default="completed"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="paymentId"/>
+        </out-parameters>
+        <actions>
+            <service-call name="create#durion.sales.DurSalePayment" in-map="context" out-map="context"/>
+        </actions>
+    </service>
+
+</services>
